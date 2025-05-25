@@ -1,0 +1,954 @@
+
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Phone VARCHAR(20) NOT NULL,
+    Address VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Book (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(100) NOT NULL,
+    ISBN VARCHAR(20) UNIQUE NOT NULL,
+    Price DECIMAL(10,2) NOT NULL CHECK (Price > 0),
+    Category VARCHAR(50) NOT NULL,
+    Publisher VARCHAR(100),
+    PublishedDate DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE DEFAULT CURRENT_DATE,
+    CustomerID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+CREATE TABLE OrderDetails (
+    OrderID INT,
+    BookID INT,
+    Quantity INT NOT NULL CHECK (Quantity > 0),
+    Subtotal DECIMAL(10,2) NOT NULL CHECK (Subtotal >= 0),
+    PRIMARY KEY (OrderID, BookID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE,
+    FOREIGN KEY (BookID) REFERENCES Book(BookID) ON DELETE CASCADE
+);
+
+CREATE TABLE Payment (
+    PaymentID INT PRIMARY KEY,
+    OrderID INT UNIQUE NOT NULL,
+    PaymentDate DATE DEFAULT CURRENT_DATE,
+    PaymentMethod VARCHAR(50) NOT NULL CHECK (PaymentMethod IN ('Cash', 'Card', 'Mobile')),
+    AmountPaid DECIMAL(10,2) NOT NULL CHECK (AmountPaid >= 0),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+CREATE TABLE Stock (
+    StockID INT PRIMARY KEY,
+    BookID INT UNIQUE NOT NULL,
+    QuantityInStock INT NOT NULL CHECK (QuantityInStock >= 0),
+    LastRestocked DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (BookID) REFERENCES Book(BookID)
+);
+
+CREATE TABLE Administrator (
+    AdminID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Username VARCHAR(50) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO Customer (CustomerID, Name, Email, Phone, Address) VALUES
+(1, 'Grace Mugisha', 'grace@mugisha.com', '0788123456', 'Kigali');
+
+INSERT INTO Customer (CustomerID, Name, Email, Phone, Address) VALUES
+(2, 'Paul Ntambara', 'paul@ntambara.com', '0788234567', 'Kigali');
+INSERT INTO Customer (CustomerID, Name, Email, Phone, Address) VALUES
+(3, 'Alice Niyonsaba', 'alice@niyo.com', '0789345678', 'Nyamirambo');
+
+INSERT INTO Customer (CustomerID, Name, Email, Phone, Address) VALUES
+(4, 'James Rutikanga', 'james@rutikanga.com', '0789456789', 'Remera');
+
+SELECT * FROM Customer;
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher) VALUES
+(6, 'Python for Data Science', 'Jake VanderPlas', '9781491912058', 65.00, 'Data Science', 'O’Reilly');
+
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher) VALUES
+(7, 'Design Patterns', 'Erich Gamma', '9780201633610', 70.00, 'Software Engineering', 'Addison-Wesley');
+
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher) VALUES
+(8, 'Learning MySQL', 'Seyed Tahaghoghi', '9780596008642', 40.00, 'Databases', 'O’Reilly');
+
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher) VALUES
+(9, 'HTML & CSS', 'Jon Duckett', '9781118008188', 35.00, 'Web Development', 'Wiley');
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(6, SYSDATE, 6);
+
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(7, SYSDATE, 7);
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(8, SYSDATE, 8);
+
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(9, SYSDATE, 9);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(6, 6, 2, 130.00);
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(7, 7, 1, 70.00);
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(8, 8, 1, 40.00);
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(9, 9, 2, 70.00);
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(6, 6, SYSDATE, 'Card', 130.00);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(7, 7, SYSDATE, 'Mobile', 70.00);
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(8, 8, SYSDATE, 'Cash', 40.00);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(9, 9, SYSDATE, 'Card', 70.00);
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(6, 6, 10, SYSDATE);
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(7, 7, 5, SYSDATE);
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(8, 8, 12, SYSDATE);
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(9, 9, 8, SYSDATE);
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(6, 'Samuel Kamanzi', 'sam_admin', 'adminsam123');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(7, 'Linda Uwimana', 'linda_admin', 'adminlinda123');
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(8, 'Kevin Mugenzi', 'kevin_admin', 'adminkevin123');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(9, 'Diane Ingabire', 'diane_admin', 'admindiane123');
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher) VALUES
+
+
+
+SELECT * FROM Orders;
+
+SELECT * FROM Orders WHERE OrderID = 5;
+
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(4, CURRENT_DATE, 1);
+SELECT * FROM Orders WHERE OrderID = 4;
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(5, 5, 1, 30.25);
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(1, 1, 2, 111.98);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(2, 2, 1, 45.00);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(3, 3, 1, 50.50);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(4, 4, 3, 180.00);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(5, 5, 1, 30.25);
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(5, 5, 1, 30.25);
+
+
+SELECT * FROM Orders WHERE OrderID = 5;
+
+SELECT * FROM Book WHERE BookID = 5;
+
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES
+(5, CURRENT_DATE, 1);
+
+INSERT INTO OrderDetails (OrderID, BookID, Quantity, Subtotal) VALUES
+(5, 5, 1, 30.25);
+SELECT * FROM Book;
+SELECT * FROM Orders;
+
+SELECT * FROM OrderDetails;
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(1, 1, TO_DATE('2024-05-01', 'YYYY-MM-DD'), 'Cash', 55.99);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(2, 2, TO_DATE('2024-05-02', 'YYYY-MM-DD'), 'Card', 45.00);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(3, 3, TO_DATE('2024-05-03', 'YYYY-MM-DD'), 'Mobile', 50.50);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(4, 4, TO_DATE('2024-05-04', 'YYYY-MM-DD'), 'Cash', 60.00);
+
+INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentMethod, AmountPaid) VALUES
+(5, 5, TO_DATE('2024-05-05', 'YYYY-MM-DD'), 'Card', 30.25);
+
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(1, 1, 100, TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(2, 2, 75, TO_DATE('2024-05-02', 'YYYY-MM-DD'));
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(3, 3, 60, TO_DATE('2024-05-03', 'YYYY-MM-DD'));
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(4, 4, 50, TO_DATE('2024-05-04', 'YYYY-MM-DD'));
+
+INSERT INTO Stock (StockID, BookID, QuantityInStock, LastRestocked) VALUES
+(5, 5, 120, TO_DATE('2024-05-05', 'YYYY-MM-DD'));
+
+
+
+SELECT * FROM Payment;
+SELECT * FROM Stock;
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(1, 'Alice Johnson', 'alice_admin', 'admin123');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(2, 'Bob Smith', 'bob_admin', 'pass456');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(3, 'Catherine Lee', 'cathy_admin', 'secure789');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(4, 'David Kim', 'david_admin', 'adminpass');
+
+INSERT INTO Administrator (AdminID, Name, Username, Password) VALUES
+(5, 'Eva Brown', 'eva_admin', 'mypassword');
+
+SELECT * FROM Administrator;
+
+
+ALTER TABLE Customer ADD CONSTRAINT chk_phone_length CHECK (LENGTH(Phone) BETWEEN 10 AND 15);
+
+ALTER TABLE Book ADD CONSTRAINT chk_price_max CHECK (Price <= 500);
+
+
+
+
+ALTER TABLE Orders
+ADD CONSTRAINT chk_order_id_positive CHECK (OrderID > 0);
+
+ALTER TABLE OrderDetails
+MODIFY OrderID INT NOT NULL;
+
+ALTER TABLE OrderDetails
+MODIFY BookID INT NOT NULL;
+
+select * from customer;
+
+
+ALTER TABLE OrderDetails
+ADD CONSTRAINT chk_quantity_limit CHECK (Quantity <= 100);
+
+ALTER TABLE Payment
+MODIFY PaymentDate DATE NOT NULL;
+
+
+ALTER TABLE Payment
+ADD CONSTRAINT chk_positive_amount CHECK (AmountPaid > 0);
+
+SELECT * FROM Stock WHERE BookID IS NULL;
+UPDATE Stock SET BookID = 0 WHERE BookID IS NULL; -- or a valid default
+ALTER TABLE Stock MODIFY BookID INT NOT NULL;
+SELECT BookID, COUNT(*) 
+FROM Stock 
+GROUP BY BookID 
+HAVING COUNT(*) > 1;
+ALTER TABLE Stock ADD CONSTRAINT uq_book_stock UNIQUE (BookID);
+ALTER TABLE Stock ADD CONSTRAINT chk_quantity_stock_positive CHECK (QuantityInStock >= 0);
+ALTER TABLE Stock ADD CONSTRAINT chk_valid_stockid CHECK (StockID > 0);
+
+-- Ensure AdminID is positive and not null
+ALTER TABLE Administrator 
+MODIFY AdminID INT NOT NULL;
+
+ALTER TABLE Administrator 
+ADD CONSTRAINT chk_admin_id_positive CHECK (AdminID > 0);
+
+-- Ensure Name is not empty or just whitespace
+ALTER TABLE Administrator 
+MODIFY Name VARCHAR(100) NOT NULL;
+
+ALTER TABLE Administrator 
+ADD CONSTRAINT chk_admin_name_length CHECK (LENGTH(TRIM(Name)) > 1);
+
+-- Ensure AdminID is positive and not null
+ALTER TABLE Administrator 
+MODIFY AdminID INT NOT NULL;
+
+ALTER TABLE Administrator 
+ADD CONSTRAINT chk_admin_id_positive CHECK (AdminID > 0);
+
+-- Ensure Name is not empty or just whitespace
+ALTER TABLE Administrator 
+MODIFY Name VARCHAR(100) NOT NULL;
+
+ALTER TABLE Administrator 
+ADD CONSTRAINT chk_admin_name_length CHECK (LENGTH(TRIM(Name)) > 1);
+
+ALTER TABLE Administrator 
+ADD CONSTRAINT chk_username_format CHECK (REGEXP_LIKE(Username, '^[A-Za-z0-9_]{4,50}$'));
+
+INSERT INTO Customer (CustomerID, Name, Email, Phone, Address)
+VALUES (10, 'Eliane Uwimana', 'eliane@uwimana.com', '0787654321', 'Kigali');
+
+
+UPDATE Customer SET Phone = '0799999999' WHERE CustomerID = 10;
+
+DELETE FROM Customer WHERE CustomerID = 10;
+
+UPDATE Stock
+SET QuantityInStock = 40
+WHERE BookID = 1;
+UPDATE Payment
+SET PaymentMethod = 'Mobile', AmountPaid = 120.00
+WHERE PaymentID = 2;
+UPDATE Orders
+SET OrderDate = TO_DATE('2025-05-10', 'YYYY-MM-DD')
+WHERE OrderID = 2;
+UPDATE OrderDetails
+SET Quantity = 2, Subtotal = 120.00
+WHERE OrderID = 2 AND BookID = 2;
+
+SELECT *
+FROM (
+    SELECT 
+        o.CustomerID,
+        b.Title,
+        SUM(od.Quantity) AS TotalPurchased,
+        RANK() OVER (PARTITION BY o.CustomerID ORDER BY SUM(od.Quantity) DESC) AS BookRank
+    FROM 
+        Orders o
+    JOIN OrderDetails od ON o.OrderID = od.OrderID
+    JOIN Book b ON od.BookID = b.BookID
+    GROUP BY o.CustomerID, b.Title
+) ranked_books
+WHERE BookRank <= 3;
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT 
+    o.OrderID,
+    o.CustomerID,
+    p.AmountPaid,
+    SUM(p.AmountPaid) OVER (PARTITION BY o.CustomerID) AS TotalSpentByCustomer
+FROM 
+    Orders o
+JOIN Payment p ON o.OrderID = p.OrderID;
+
+
+
+
+
+
+
+SELECT 
+    od.OrderID,
+    od.BookID,
+    b.Title,
+    od.Quantity,
+    od.Subtotal,
+    ROW_NUMBER() OVER (ORDER BY od.Subtotal DESC) AS PurchaseRank
+FROM 
+    OrderDetails od
+JOIN Book b ON od.BookID = b.BookID;
+
+SELECT 
+    o.CustomerID,
+    b.Title,
+    SUM(od.Quantity) AS TotalQuantity
+FROM 
+    Orders o
+JOIN OrderDetails od ON o.OrderID = od.OrderID
+JOIN Book b ON od.BookID = b.BookID
+GROUP BY o.CustomerID, b.Title;
+
+CREATE TABLE Category (
+    CategoryID INT PRIMARY KEY,
+    CategoryName VARCHAR(100) NOT NULL UNIQUE,
+    Description VARCHAR(255),
+    Status VARCHAR(20) DEFAULT 'Active' CHECK (Status IN ('Active', 'Inactive'))
+);
+DROP TABLE Category;
+
+
+INSERT INTO Book (BookID, Title, Author, ISBN, Price, Category, Publisher, Pages)
+VALUES (201, 'Intro to SQL', 'Jane Smith', '9789999999991', 35.00, 'Database', 'Reilly', 320);
+
+-- Update
+UPDATE Book SET Price = 39.99 WHERE BookID = 201;
+
+-- Delete
+DELETE FROM Book WHERE BookID = 201;
+
+
+
+//SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE GetCustomerByEmail (
+    p_email IN Customer.email%TYPE,
+    p_name OUT Customer.name%TYPE,
+    p_phone OUT Customer.phone%TYPE
+)
+IS
+BEGIN
+    SELECT name, phone INTO p_name, p_phone
+    FROM Customer
+    WHERE email = p_email;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No customer found with that email.');
+        p_name := NULL;
+        p_phone := NULL;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Unexpected error: ' || SQLERRM);
+        p_name := NULL;
+        p_phone := NULL;
+END;
+/
+-- ✅ The slash marks the END of the procedure
+
+-- Now you can declare a new block separately
+DECLARE
+    v_name  Customer.name%TYPE;
+    v_phone Customer.phone%TYPE;
+BEGIN
+    GetCustomerByEmail('john@mucyo.com', v_name, v_phone);
+
+    IF v_name IS NOT NULL THEN
+        DBMS_OUTPUT.PUT_LINE('Customer Name: ' || v_name);
+        DBMS_OUTPUT.PUT_LINE('Customer Phone: ' || v_phone);
+    END IF;
+END;
+/
+//SET SERVEROUTPUT ON;
+
+-- Step 1: Create or Replace the Function
+CREATE OR REPLACE FUNCTION GetTotalSpentByCustomer(p_customer_id IN INT)
+RETURN NUMBER
+IS
+    v_total NUMBER := 0;
+BEGIN
+    SELECT NVL(SUM(p.AmountPaid), 0)
+    INTO v_total
+    FROM Orders o
+    JOIN Payment p ON o.OrderID = p.OrderID
+    WHERE o.CustomerID = p_customer_id;
+
+    RETURN v_total;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN 0;
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+        RETURN -1;
+END;
+/
+
+-- Step 2: Test the Function
+DECLARE
+    v_result NUMBER;
+BEGIN
+    v_result := GetTotalSpentByCustomer(1); -- Change 1 to an existing CustomerID
+    DBMS_OUTPUT.PUT_LINE('Total Spent by Customer 1: ' || v_result);
+END;
+/
+//SET SERVEROUTPUT ON;
+ -- Books with stock < 10
+
+CREATE OR REPLACE PROCEDURE GetLowStockBooks(p_threshold IN INT) 
+IS
+    -- Declare cursor with parameter
+    CURSOR low_stock_cursor IS
+        SELECT b.BookID, b.Title, s.QuantityInStock
+        FROM Book b
+        JOIN Stock s ON b.BookID = s.BookID
+        WHERE s.QuantityInStock < p_threshold;
+    
+    -- Variables
+    v_book_id Book.BookID%TYPE;
+    v_title Book.Title%TYPE;
+    v_quantity Stock.QuantityInStock%TYPE;
+BEGIN
+    -- Open cursor
+    OPEN low_stock_cursor;
+    
+    -- Fetch and process each row
+    LOOP
+        FETCH low_stock_cursor INTO v_book_id, v_title, v_quantity;
+        EXIT WHEN low_stock_cursor%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT_LINE(
+            'Book ID: ' || v_book_id || 
+            ', Title: ' || v_title || 
+            ', Stock Left: ' || v_quantity
+        );
+    END LOOP;
+    
+    -- Close cursor
+    CLOSE low_stock_cursor;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+        IF low_stock_cursor%ISOPEN THEN
+            CLOSE low_stock_cursor;
+        END IF;
+END;
+/
+EXEC GetLowStockBooks(10); 
+
+
+
+
+
+
+
+
+-- Package Specification
+CREATE OR REPLACE PACKAGE bookstore_pkg AS
+    -- Cursor to fetch books by category
+    PROCEDURE GetBooksByCategory(p_category IN VARCHAR2);
+    
+    -- Get total amount spent by a customer (function)
+    FUNCTION GetTotalSpentByCustomer(p_customer_id IN INT) RETURN NUMBER;
+    
+    -- Update book stock (procedure)
+    PROCEDURE UpdateBookStock(
+        p_book_id IN INT,
+        p_new_quantity IN INT,
+        p_success OUT BOOLEAN
+    );
+    
+    -- Fetch low-stock books (cursor-based)
+    PROCEDURE GetLowStockBooks(p_threshold IN INT);
+    
+    -- Get top 3 customers by spending (function returning REF CURSOR)
+    FUNCTION GetTopCustomers RETURN SYS_REFCURSOR;
+END bookstore_pkg;
+/
+-- Package Body
+CREATE OR REPLACE PACKAGE BODY bookstore_pkg AS
+
+    -- Procedure to list books by category
+    PROCEDURE GetBooksByCategory(p_category IN VARCHAR2) IS
+    BEGIN
+        FOR rec IN (
+            SELECT BookID, Title, Author, Price
+            FROM Book
+            WHERE Category = p_category
+        ) LOOP
+            DBMS_OUTPUT.PUT_LINE(
+                'ID: ' || rec.BookID || ', Title: ' || rec.Title || 
+                ', Author: ' || rec.Author || ', Price: ' || rec.Price
+            );
+        END LOOP;
+    END GetBooksByCategory;
+
+    -- Function to calculate total spent by a customer
+    FUNCTION GetTotalSpentByCustomer(p_customer_id IN INT) RETURN NUMBER IS
+        v_total NUMBER := 0;
+    BEGIN
+        SELECT NVL(SUM(p.AmountPaid), 0)
+        INTO v_total
+        FROM Orders o
+        JOIN Payment p ON o.OrderID = p.OrderID
+        WHERE o.CustomerID = p_customer_id;
+
+        RETURN v_total;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RETURN 0;
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+            RETURN -1;
+    END GetTotalSpentByCustomer;
+
+    -- Procedure to update stock quantity for a book
+    PROCEDURE UpdateBookStock(
+        p_book_id IN INT,
+        p_new_quantity IN INT,
+        p_success OUT BOOLEAN
+    ) IS
+    BEGIN
+        UPDATE Stock
+        SET QuantityInStock = p_new_quantity,
+            LastRestocked = SYSDATE
+        WHERE BookID = p_book_id;
+
+        IF SQL%ROWCOUNT > 0 THEN
+            p_success := TRUE;
+        ELSE
+            p_success := FALSE;
+        END IF;
+    EXCEPTION
+        WHEN OTHERS THEN
+            p_success := FALSE;
+            DBMS_OUTPUT.PUT_LINE('Error updating stock: ' || SQLERRM);
+    END UpdateBookStock;
+
+    -- Procedure to display low stock books below a threshold
+    PROCEDURE GetLowStockBooks(p_threshold IN INT) IS
+        CURSOR low_stock_cursor IS
+            SELECT b.BookID, b.Title, s.QuantityInStock
+            FROM Book b
+            JOIN Stock s ON b.BookID = s.BookID
+            WHERE s.QuantityInStock < p_threshold;
+        
+        v_book_id Book.BookID%TYPE;
+        v_title Book.Title%TYPE;
+        v_quantity Stock.QuantityInStock%TYPE;
+    BEGIN
+        OPEN low_stock_cursor;
+        LOOP
+            FETCH low_stock_cursor INTO v_book_id, v_title, v_quantity;
+            EXIT WHEN low_stock_cursor%NOTFOUND;
+
+            DBMS_OUTPUT.PUT_LINE('Book ID: ' || v_book_id || 
+                                 ', Title: ' || v_title || 
+                                 ', Stock Left: ' || v_quantity);
+        END LOOP;
+        CLOSE low_stock_cursor;
+    EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+            IF low_stock_cursor%ISOPEN THEN
+                CLOSE low_stock_cursor;
+            END IF;
+    END GetLowStockBooks;
+
+    -- Function returning REF CURSOR of top 3 customers by spending
+    FUNCTION GetTopCustomers RETURN SYS_REFCURSOR IS
+        v_cursor SYS_REFCURSOR;
+    BEGIN
+        OPEN v_cursor FOR
+            SELECT CustomerID, SUM(AmountPaid) AS TotalSpent
+            FROM Orders o
+            JOIN Payment p ON o.OrderID = p.OrderID
+            GROUP BY CustomerID
+            ORDER BY TotalSpent DESC
+            FETCH FIRST 3 ROWS ONLY;
+
+        RETURN v_cursor;
+    END GetTopCustomers;
+
+END bookstore_pkg;
+/
+BEGIN
+    bookstore_pkg.GetBooksByCategory('Data Science');
+END;
+/
+DECLARE
+    v_total NUMBER;
+BEGIN
+    v_total := bookstore_pkg.GetTotalSpentByCustomer(1);
+    DBMS_OUTPUT.PUT_LINE('Total spent: ' || v_total);
+END;
+/
+DECLARE
+    v_success BOOLEAN;
+BEGIN
+    bookstore_pkg.UpdateBookStock(6, 25, v_success);
+    IF v_success THEN
+        DBMS_OUTPUT.PUT_LINE('Stock updated successfully');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Failed to update stock');
+    END IF;
+END;
+/
+BEGIN
+    bookstore_pkg.GetLowStockBooks(10);
+END;
+/
+DECLARE
+    v_cursor SYS_REFCURSOR;
+    v_customer_id INT;
+    v_total_spent NUMBER;
+BEGIN
+    v_cursor := bookstore_pkg.GetTopCustomers;
+    LOOP
+        FETCH v_cursor INTO v_customer_id, v_total_spent;
+        EXIT WHEN v_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Customer ID: ' || v_customer_id || ', Total Spent: ' || v_total_spent);
+    END LOOP;
+    CLOSE v_cursor;
+END;
+/
+CREATE TABLE inventory_audit (
+    audit_id     NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    action_type  VARCHAR2(10),
+    table_name   VARCHAR2(50),
+    record_id    VARCHAR2(20),
+    field_name   VARCHAR2(50),
+    old_value    VARCHAR2(100),
+    new_value    VARCHAR2(100),
+    user_id      VARCHAR2(30),
+    action_time  TIMESTAMP DEFAULT SYSTIMESTAMP
+);
+CREATE OR REPLACE TRIGGER trg_book_price_change
+BEFORE UPDATE OF price ON book
+FOR EACH ROW
+BEGIN
+    INSERT INTO inventory_audit (
+        action_type, 
+        table_name, 
+        record_id, 
+        field_name, 
+        old_value, 
+        new_value, 
+        user_id
+    )
+    VALUES (
+        'UPDATE',
+        'BOOK',
+        TO_CHAR(:OLD.bookid),
+        'PRICE',
+        TO_CHAR(:OLD.price),
+        TO_CHAR(:NEW.price),
+        USER
+    );
+END;
+/
+-- Example update
+UPDATE book
+SET price = price + 5
+WHERE bookid = 1;
+
+-- Check the audit table
+SELECT * FROM inventory_audit ORDER BY action_time DESC;
+CREATE OR REPLACE TRIGGER trg_before_delete_book
+BEFORE DELETE ON book
+FOR EACH ROW
+BEGIN
+    INSERT INTO inventory_audit (
+        action_type,
+        table_name,
+        record_id,
+        field_name,
+        old_value,
+        new_value,
+        user_id
+    )
+    VALUES (
+        'DELETE',
+        'BOOK',
+        TO_CHAR(:OLD.bookid),
+        'TITLE',
+        :OLD.title,
+        NULL,
+        USER
+    );
+END;
+/
+-- Delete a sample book (make sure bookid 101 exists)
+DELETE FROM book WHERE bookid = 1;
+COMMIT;
+-- View audit trail
+SELECT * FROM inventory_audit ORDER BY action_time DESC;
+CREATE OR REPLACE TRIGGER trg_simple_book
+BEFORE UPDATE ON book
+FOR EACH ROW
+BEGIN
+    :NEW.price := :OLD.price + 10;
+END;
+/
+UPDATE book SET price = price + 0.01 WHERE bookid = 3;
+
+
+COMMIT;
+SELECT bookid, title, price FROM book;
+CREATE OR REPLACE TRIGGER trg_compound_book
+FOR UPDATE ON book
+COMPOUND TRIGGER
+
+  -- Declaration section (optional)
+  v_changes NUMBER := 0;
+
+  BEFORE STATEMENT IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Before statement section executed.');
+  END BEFORE STATEMENT;
+
+  BEFORE EACH ROW IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Before each row section executed.');
+  END BEFORE EACH ROW;
+
+  AFTER EACH ROW IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('After each row section executed.');
+    v_changes := v_changes + 1;
+  END AFTER EACH ROW;
+
+  AFTER STATEMENT IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('After statement section executed.');
+    DBMS_OUTPUT.PUT_LINE('Total rows changed: ' || v_changes);
+  END AFTER STATEMENT;
+
+END trg_compound_book;
+/
+-- Update one or more book prices
+UPDATE book
+SET price = price + 5
+WHERE category = 'Programming';
+
+COMMIT;
+
+-- Create the reference table for public holidays
+CREATE TABLE holiday_dates (
+    holiday_date DATE PRIMARY KEY,
+    description   VARCHAR2(100)
+);
+
+-- Insert a test holiday (replace with a known upcoming weekday or today for testing)
+INSERT INTO holiday_dates VALUES (TRUNC(SYSDATE), 'Testing Day');
+
+COMMIT;
+
+
+
+
+
+
+
+-- Insert test holidays (must be within the upcoming month from today)
+INSERT INTO holiday_dates VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'Martyrs Day');
+INSERT INTO holiday_dates VALUES (TO_DATE('2025-06-10', 'YYYY-MM-DD'), 'National Reading Day');
+COMMIT;
+CREATE OR REPLACE TRIGGER trg_restrict_employee_changes
+BEFORE INSERT OR UPDATE OR DELETE ON book
+FOR EACH ROW
+DECLARE
+    v_today VARCHAR2(10);
+    v_is_holiday NUMBER;
+BEGIN
+    -- Get current day of the week
+    v_today := TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH');
+
+    -- Check if today is a holiday (assume there's a table `public_holidays`)
+    SELECT COUNT(*) INTO v_is_holiday
+    FROM public_holidays
+    WHERE TRUNC(holiday_date) = TRUNC(SYSDATE);
+
+    -- If weekday (Mon-Fri) or public holiday, block it
+    IF v_today IN ('MON', 'TUE', 'WED', 'THU', 'FRI') OR v_is_holiday > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, '❌ Not allowed: It is a weekday or public holiday.');
+    END IF;
+END;
+/
+SELECT table_name FROM user_tables WHERE table_name = 'PUBLIC_HOLIDAYS';
+SELECT COUNT(*) INTO v_count
+FROM other_schema.public_holidays
+WHERE holiday_date = TRUNC(SYSDATE);
+
+INSERT INTO public_holidays (holiday_date, description)
+VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'National Day');
+CREATE TABLE public_holidays (
+    holiday_date DATE PRIMARY KEY,
+    description VARCHAR2(100)
+);
+
+SELECT * FROM public_holidays;
+
+SELECT * FROM other_schema.public_holidays;
+INSERT INTO public_holidays (holiday_date, description)
+VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'Independence Day');
+
+INSERT INTO public_holidays (holiday_date, description)
+VALUES (TO_DATE('2025-06-03', 'YYYY-MM-DD'), 'Martyrs Day');
+
+COMMIT;
+
+
+GRANT SELECT ON public_holidays TO murungi;
+
+
+
+CREATE TABLE public_holidays (
+    holiday_date DATE PRIMARY KEY,
+    description VARCHAR2(100)
+);
+INSERT INTO public_holidays (holiday_date, description)
+VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'Independence Day');
+
+INSERT INTO public_holidays (holiday_date, description)
+VALUES (TO_DATE('2025-06-03', 'YYYY-MM-DD'), 'Martyrs Day');
+
+SELECT * FROM public_holidays;
+SELECT COUNT(*) INTO v_holiday_count
+FROM public_holidays
+WHERE holiday_date = TRUNC(SYSDATE);
+CREATE SYNONYM public_holidays FOR other_schema.public_holidays;
+
+
+COMMIT;
+
+
+CREATE OR REPLACE TRIGGER trg_block_weekday_and_holiday_changes
+BEFORE INSERT OR UPDATE OR DELETE ON book
+FOR EACH ROW
+DECLARE
+    v_day VARCHAR2(10);
+    v_today DATE := TRUNC(SYSDATE);
+    v_next_month DATE := ADD_MONTHS(TRUNC(SYSDATE), 1);
+    v_is_holiday NUMBER;
+BEGIN
+    -- Get the current day name (e.g., 'MONDAY')
+    SELECT TO_CHAR(v_today, 'DAY', 'NLS_DATE_LANGUAGE=ENGLISH') INTO v_day FROM dual;
+    v_day := TRIM(UPPER(v_day));
+
+    -- Check if today is a holiday in the current or next month
+    SELECT COUNT(*) INTO v_is_holiday
+    FROM holiday_dates
+    WHERE TRUNC(holiday_date) = v_today
+      AND holiday_date >= TRUNC(SYSDATE)
+      AND holiday_date < v_next_month;
+
+    -- Block if it's Monday to Friday or it's a holiday
+    IF v_day IN ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY') OR v_is_holiday > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, '❌ Action blocked: Weekdays or public holidays are restricted.');
+    END IF;
+END;
+/
+SELECT TO_CHAR(SYSDATE, 'DAY') AS current_day FROM dual;
+UPDATE book SET price = price + 1 WHERE bookid = 1;
+

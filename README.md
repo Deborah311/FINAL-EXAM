@@ -153,24 +153,34 @@ DROP
 
 WINDOW FUNCTION  
 
+A window function performs a calculation across a set of table rows that are related to the current row, without collapsing the result into a single row.
+
 ![Show how many of each book each customer has purchased in total](https://github.com/user-attachments/assets/ea631e6b-a790-4ad2-8b8e-90ec472017ba)
 ![Find the Top 3 Books per Customer](https://github.com/user-attachments/assets/d92c6c57-9491-41d2-82e6-83810d2296a3)
 ![Assign a row number to each book purchase, ranked by Subtotal (highest first)](https://github.com/user-attachments/assets/48beaa9b-3173-4528-a7e4-660a779975af)
 
 PROCEDURE  
 
+A procedure is a named block of code that performs a specific task, but does not return a value directly 
+
 ![test procedure](https://github.com/user-attachments/assets/2f7c1cc8-f431-4812-80a7-59c4bce06f34)
 ![procedures](https://github.com/user-attachments/assets/d7c79164-4c00-4e3b-a9c5-38d7ea8b2639)
 
 FUNCTIONS
 
+A  Function is a named block of code that performs a specific task and returns a single value.
+ 
 ![FUNCTION](https://github.com/user-attachments/assets/18555c7c-2678-466c-a075-ba5a572b07c2)
 
 CURSOR
 
+A cursor is a pointer to a result set of a query. It allows you to process query results row-by-row in PL/SQL.
+ 
 ![CURSOR](https://github.com/user-attachments/assets/29dbf53d-6dde-4637-80e8-aeba4358f0df)
 
 PACKAGE
+
+A package in PL/SQL is a grouping of related procedures, functions, variables, cursors, and other PL/SQL elements stored together in the database.
 
 ![packege](https://github.com/user-attachments/assets/049b5c81-d813-47db-ac72-be7d2386baad)
 

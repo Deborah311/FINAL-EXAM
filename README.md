@@ -120,17 +120,21 @@ The lack of real-time inventory monitoring, secure user activity tracking, and a
 # PHASE 7: Advanced Database Programming and Auditing
 
 UPDATE AND DELETE IN TRIGGER
+
 ![deletebefore trigger](https://github.com/user-attachments/assets/8604d709-7b91-4965-8c9b-d21ec588c936) 
 ![update and delete from triger output](https://github.com/user-attachments/assets/90f93f92-f3bd-4d46-b5b1-0a7e160c0018)
 
 COMPOUND TRIGGER AND SIMPLE TRIGGER
+
 ![simple trigger](https://github.com/user-attachments/assets/37dd3e28-a5d3-4f9f-8d23-39e7123187b2)
 ![compondtriggers](https://github.com/user-attachments/assets/55e2570c-dac6-483b-90cb-e98b27ccc000)
 
 REFERENCE TABLE
+
 ![refer and inserted](https://github.com/user-attachments/assets/74e88170-ec30-4ab5-a8d6-039d8052eb6c)
 
 AUDITING TABLE
+
 ![inventory](https://github.com/user-attachments/assets/5c4df38a-fa46-4bbb-9778-c20f6735c274) 
 ![triger1](https://github.com/user-attachments/assets/3d33a4e4-c4b6-4b23-8f09-843740e9218b)
 ![ristriction](https://github.com/user-attachments/assets/71d01317-dce6-44dd-a23a-dfe956085f67)

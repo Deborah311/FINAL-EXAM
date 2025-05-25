@@ -4,12 +4,13 @@ Online Bookstore Inventory Management System
 PHASE 1
 [Online-Bookstore-Inventory-Management-System by DEBORAH MURUNGI.pptx](https://github.com/user-attachments/files/20430333/Online-Bookstore-Inventory-Management-System.by.DEBORAH.MURUNGI.pptx)
 
-PHASE 2
+# PHASE 2: BPMN(Business Process Modeling Notation)
 
 ![bpmn](https://github.com/user-attachments/assets/2140e3a3-daf9-40d5-8f4b-0bfc19b9e400)
  
 
-PHASE 3 
+# PHASE 3: Logical and Model Design
+
 ![ERDIAGRAM](https://github.com/user-attachments/assets/16ecc31a-10be-4245-9500-dd4053ea6676)
  
 
@@ -33,7 +34,7 @@ Relationships & Constraints:
 
 
 
-PHASE 4 Database Creation:
+# PHASE 4: Database Creation 
 
 ![PDBS](https://github.com/user-attachments/assets/5a4c7062-5df6-413c-88f8-7cf82b96f59a)
 ![USER](https://github.com/user-attachments/assets/214949fb-6b1b-4dc4-99fc-8b689603647d)
@@ -44,7 +45,7 @@ TABLE SPACE
 ![tablespace](https://github.com/user-attachments/assets/86c6c17d-0c1d-40e9-902e-6cc8780fb6bd)
 
 
-
+# PHASE 5: Table Implementation and Data Insertion
 
 TABLE CREATION
 customer table
@@ -70,6 +71,8 @@ ADMINISTRATOR TABLE
 ![Admn](https://github.com/user-attachments/assets/0e004162-d706-4259-a81e-7ac4ac2205a7)
 
  
+
+ 
 ![insert in cust](https://github.com/user-attachments/assets/a48e276b-37e7-4cb9-9be1-cc0260072527)
 ![row affected on book](https://github.com/user-attachments/assets/1e97d559-3bda-406a-b5f5-4e898c36b4f0)
 ![row insrted on orders](https://github.com/user-attachments/assets/97dccb95-aa9a-4b4e-8740-d6c26f090a81)
@@ -79,4 +82,56 @@ ADMINISTRATOR TABLE
 ![row inserted in admn](https://github.com/user-attachments/assets/8538f7cf-a817-4297-beed-6234ef0209d2)
 
 Update STOCK
+![updates](https://github.com/user-attachments/assets/2b25aaac-0851-4db6-a6c7-49f99c636e56)
+
+DELETE
+![customer delete](https://github.com/user-attachments/assets/c5296c81-4fdb-44e8-aeba-44694b751958)
+DROP
+![drop category](https://github.com/user-attachments/assets/646d3db4-58ca-4233-be61-5b2c778238d0)
+
+
+# PHASE 6:Database Interaction and Transactions
+
+
+WINDOW FUNCTION  
+![Show how many of each book each customer has purchased in total](https://github.com/user-attachments/assets/ea631e6b-a790-4ad2-8b8e-90ec472017ba)
+![Find the Top 3 Books per Customer](https://github.com/user-attachments/assets/d92c6c57-9491-41d2-82e6-83810d2296a3)
+![Assign a row number to each book purchase, ranked by Subtotal (highest first)](https://github.com/user-attachments/assets/48beaa9b-3173-4528-a7e4-660a779975af)
+
+PROCEDURE  
+![test procedure](https://github.com/user-attachments/assets/2f7c1cc8-f431-4812-80a7-59c4bce06f34)
+![procedures](https://github.com/user-attachments/assets/d7c79164-4c00-4e3b-a9c5-38d7ea8b2639)
+
+FUNCTIONS
+![FUNCTION](https://github.com/user-attachments/assets/18555c7c-2678-466c-a075-ba5a572b07c2)
+
+CURSOR
+![CURSOR](https://github.com/user-attachments/assets/29dbf53d-6dde-4637-80e8-aeba4358f0df)
+
+PACKAGE
+![packege](https://github.com/user-attachments/assets/049b5c81-d813-47db-ac72-be7d2386baad)
+Problem Statement
+Traditional bookstore operations often rely on manual inventory tracking, leading to data inconsistencies, stock mismanagement, and delays in order processing. These inefficiencies result in poor customer satisfaction, increased operational costs, and the risk of stockouts or overstocking.
+
+The lack of real-time inventory monitoring, secure user activity tracking, and automatic restrictions during non-working periods (such as public holidays or weekends) further complicates inventory management. Moreover, unauthorized data modifications can compromise data integrity, while the absence of auditing mechanisms makes it difficult to trace user actions.
+
+
+
+# PHASE 7: Advanced Database Programming and Auditing
+
+UPDATE AND DELETE IN TRIGGER
+![deletebefore trigger](https://github.com/user-attachments/assets/8604d709-7b91-4965-8c9b-d21ec588c936) 
+![update and delete from triger output](https://github.com/user-attachments/assets/90f93f92-f3bd-4d46-b5b1-0a7e160c0018)
+
+COMPOUND TRIGGER AND SIMPLE TRIGGER
+![simple trigger](https://github.com/user-attachments/assets/37dd3e28-a5d3-4f9f-8d23-39e7123187b2)
+![compondtriggers](https://github.com/user-attachments/assets/55e2570c-dac6-483b-90cb-e98b27ccc000)
+
+REFERENCE TABLE
+![refer and inserted](https://github.com/user-attachments/assets/74e88170-ec30-4ab5-a8d6-039d8052eb6c)
+
+AUDITING TABLE
+![inventory](https://github.com/user-attachments/assets/5c4df38a-fa46-4bbb-9778-c20f6735c274) 
+![triger1](https://github.com/user-attachments/assets/3d33a4e4-c4b6-4b23-8f09-843740e9218b)
+![ristriction](https://github.com/user-attachments/assets/71d01317-dce6-44dd-a23a-dfe956085f67)
 

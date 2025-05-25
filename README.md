@@ -6,11 +6,12 @@ PHASE 1
 
 PHASE 2
 
-![bpmn](https://github.com/user-attachments/assets/0815ba0f-5cdf-4fcc-9554-e6550d569ba6)
+![bpmn](https://github.com/user-attachments/assets/2140e3a3-daf9-40d5-8f4b-0bfc19b9e400)
+ 
 
 PHASE 3 
-
-![ERDIAGRAM](https://github.com/user-attachments/assets/3b4027a6-8c3a-45be-9bd1-166ccff094c5)
+![ERDIAGRAM](https://github.com/user-attachments/assets/16ecc31a-10be-4245-9500-dd4053ea6676)
+ 
 
 Relationships & Constraints:
 
@@ -68,12 +69,14 @@ ADMINISTRATOR TABLE
 
 ![Admn](https://github.com/user-attachments/assets/0e004162-d706-4259-a81e-7ac4ac2205a7)
 
-[insert in cust](https://github.com/user-attachments/assets/2693d18d-8ce8-4408-a2fe-f80ebbbe7972)
-![insert into book](https://github.com/user-attachments/assets/c86c2fd7-0898-427a-864a-0b5cc7c9f989)
-![row insrted on orders](https://github.com/user-attachments/assets/df340c5e-f876-4804-bd22-02cf5ad18557)
-![row inserted on orderdtls](https://github.com/user-attachments/assets/edcaa74d-ef4f-4a10-af2e-6f4ebab6fa43)
-![row inserted in payment](https://github.com/user-attachments/assets/7cb865a8-3408-401b-8183-b9963bef5dd1)
-![insert in stock](https://github.com/user-attachments/assets/9a5e8fbd-1aed-4e0c-80a0-f5daac20f0dd)
-![row inserted in admn](https://github.com/user-attachments/assets/f1ebcb7f-88ac-4450-81bf-cf0719cc2cee)
+ 
+![insert in cust](https://github.com/user-attachments/assets/a48e276b-37e7-4cb9-9be1-cc0260072527)
+![row affected on book](https://github.com/user-attachments/assets/1e97d559-3bda-406a-b5f5-4e898c36b4f0)
+![row insrted on orders](https://github.com/user-attachments/assets/97dccb95-aa9a-4b4e-8740-d6c26f090a81)
+![row inserted on orderdtls](https://github.com/user-attachments/assets/0437d850-1e09-443c-a63e-fd0fd6fe7ae2) 
+![row inserted in payment](https://github.com/user-attachments/assets/94d3eaea-68a1-414f-bff4-6e6e9057a4ba)
+![insert in stock](https://github.com/user-attachments/assets/6e7fccd5-cbd1-42bb-993e-843b70e79615)
+![row inserted in admn](https://github.com/user-attachments/assets/8538f7cf-a817-4297-beed-6234ef0209d2)
+
 Update STOCK
 

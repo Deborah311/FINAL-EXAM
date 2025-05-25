@@ -5,7 +5,12 @@ Student_id: 26020
 
  MY PROJECT NAME
 Online Bookstore Inventory Management System
-# PHASE 1
+Problem Statement
+Traditional bookstore operations often rely on manual inventory tracking, leading to data inconsistencies, stock mismanagement, 
+and delays in order processing. These inefficiencies result in poor customer satisfaction, increased operational costs,
+and the risk of stockouts or overstocking.  
+
+# PHASE 1 
 
 [Online-Bookstore-Inventory-Management-System by DEBORAH MURUNGI.pptx](https://github.com/user-attachments/files/20430333/Online-Bookstore-Inventory-Management-System.by.DEBORAH.MURUNGI.pptx)
 
@@ -185,7 +190,9 @@ A package in PL/SQL is a grouping of related procedures, functions, variables, c
 ![packege](https://github.com/user-attachments/assets/049b5c81-d813-47db-ac72-be7d2386baad)
 
 Problem Statement
-Traditional bookstore operations often rely on manual inventory tracking, leading to data inconsistencies, stock mismanagement, and delays in order processing. These inefficiencies result in poor customer satisfaction, increased operational costs, and the risk of stockouts or overstocking.  
+Traditional bookstore operations often rely on manual inventory tracking, leading to data inconsistencies, stock mismanagement, 
+and delays in order processing. These inefficiencies result in poor customer satisfaction, increased operational costs,
+and the risk of stockouts or overstocking.  
 
 
 

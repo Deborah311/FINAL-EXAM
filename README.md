@@ -10,7 +10,7 @@ Traditional bookstore operations often rely on manual inventory tracking, leadin
 and delays in order processing. These inefficiencies result in poor customer satisfaction, increased operational costs,
 and the risk of stockouts or overstocking.  
 
-# PHASE 1 
+# PHASE 1  power point presentation
 
 [Online-Bookstore-Inventory-Management-System by DEBORAH MURUNGI.pptx](https://github.com/user-attachments/files/20430333/Online-Bookstore-Inventory-Management-System.by.DEBORAH.MURUNGI.pptx)
 
